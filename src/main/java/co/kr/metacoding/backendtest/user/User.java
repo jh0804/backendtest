@@ -1,6 +1,7 @@
 package co.kr.metacoding.backendtest.user;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,4 +15,10 @@ public class User {
     private Integer id;
     @Column(unique = true)
     private String name;
+
+    @Builder
+    public User(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
