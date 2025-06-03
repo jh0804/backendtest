@@ -36,6 +36,7 @@ public class UserControllerTest {
         // 테스트 후 정리할 코드
     }
 
+    // 유저 등록 성공
     @Test
     public void save_test() throws Exception {
         // given
@@ -61,6 +62,33 @@ public class UserControllerTest {
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(4));
     }
 
+    // 유저 등록 실패
+    @Test
+    public void save_fail_test() throws Exception {
+        // given
+        UserRequest.SaveDTO reqDTO = new UserRequest.SaveDTO();
+        reqDTO.setName("ssar");
+
+        String requestBody = om.writeValueAsString(reqDTO);
+        // System.out.println(requestBody);
+
+        // when
+        ResultActions actions = mvc.perform(
+                MockMvcRequestBuilders
+                        .post("/users")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = actions.andReturn().getResponse().getContentAsString();
+        //System.out.println(responseBody);
+
+        // then
+        actions.andExpect(MockMvcResultMatchers.jsonPath("$.reason").value("중복된 유저네임이 존재합니다."));
+    }
+
+    // 유저 조회 성공
     @Test
     public void get_detail_test() throws Exception {
         // given
@@ -81,6 +109,27 @@ public class UserControllerTest {
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("ssar"));
     }
 
+    // 유저 조회 실패
+    @Test
+    public void get_detail_fail_test() throws Exception {
+        // given
+        Integer userId = 4;
+
+        // when
+        ResultActions actions = mvc.perform(
+                MockMvcRequestBuilders
+                        .get("/users/{id}", userId)
+        );
+
+        // eye
+        String responseBody = actions.andReturn().getResponse().getContentAsString();
+        System.out.println(responseBody);
+
+        // then
+
+    }
+
+    // 유저 수정 성공
     @Test
     public void update_test() throws Exception {
         // given
@@ -107,5 +156,33 @@ public class UserControllerTest {
         // then
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1));
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("ssarUpdateName"));
+    }
+
+    // 유저 수정 실패
+    @Test
+    public void update_fail_test() throws Exception {
+        // given
+        Integer userId = 4;
+
+        UserRequest.UpdateDTO reqDTO = new UserRequest.UpdateDTO();
+        reqDTO.setName("ssarUpdateName");
+
+        String requestBody = om.writeValueAsString(reqDTO);
+        // System.out.println(requestBody);
+
+        // when
+        ResultActions actions = mvc.perform(
+                MockMvcRequestBuilders
+                        .put("/users/{id}", userId)
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // eye
+        String responseBody = actions.andReturn().getResponse().getContentAsString();
+        // System.out.println(responseBody);
+
+        // then
+        actions.andExpect(MockMvcResultMatchers.jsonPath("$.reason").value("해당 유저를 찾을 수 없습니다."));
     }
 }
