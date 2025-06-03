@@ -30,4 +30,15 @@ public class UserService {
                 .orElseThrow(() -> new ExceptionApi404("해당 유저를 찾을 수 없습니다"));
         return new UserResponse.DTO(userOP);
     }
+
+    @Transactional
+    public UserResponse.DTO update(Integer id, UserRequest.UpdateDTO reqDTO) {
+        // 유저 존재 여부 확인
+        User userPS = userRepository.findById(id)
+                .orElseThrow(() -> new ExceptionApi404("해당 유저를 찾을 수 없습니다"));
+
+        userPS.update(reqDTO.getName());
+
+        return new UserResponse.DTO(userPS);
+    }
 }
