@@ -14,7 +14,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public UserResponse.JoinDTO join(UserRequest.JoinDTO reqDTO) {
+    public UserResponse.SaveDTO save(UserRequest.SaveDTO reqDTO) {
         // 이미 존재하는 name인지 검사
         Optional<User> userOP = userRepository.findByName(reqDTO.getName());
         if(userOP.isPresent()) throw new ExceptionApi400("중복된 유저네임이 존재합니다.");
@@ -22,12 +22,12 @@ public class UserService {
         // 유저 등록
         User userPS = userRepository.save(reqDTO.toEntity());
 
-        return new UserResponse.JoinDTO(userPS);
+        return new UserResponse.SaveDTO(userPS);
     }
 
     public UserResponse.DTO getDetail(Integer id) {
         User userOP = userRepository.findById(id)
-                .orElseThrow(() -> new ExceptionApi404("해당 유저를 찾을 수 없습니다"));
+                .orElseThrow(() -> new ExceptionApi404("해당 유저를 찾을 수 없습니다."));
         return new UserResponse.DTO(userOP);
     }
 
@@ -35,7 +35,7 @@ public class UserService {
     public UserResponse.DTO update(Integer id, UserRequest.UpdateDTO reqDTO) {
         // 유저 존재 여부 확인
         User userPS = userRepository.findById(id)
-                .orElseThrow(() -> new ExceptionApi404("해당 유저를 찾을 수 없습니다"));
+                .orElseThrow(() -> new ExceptionApi404("해당 유저를 찾을 수 없습니다."));
 
         userPS.update(reqDTO.getName());
 

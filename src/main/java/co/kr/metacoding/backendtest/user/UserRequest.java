@@ -5,7 +5,7 @@ import lombok.Data;
 public class UserRequest {
 
     @Data
-    public static class JoinDTO {
+    public static class SaveDTO {
         private String name;
 
         public User toEntity(){
