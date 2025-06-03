@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
         log.warn(e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(new ErrorResponse("존재하지 않는 API입니다 - " + e.getMessage()));
+                .body(new ErrorResponse (e.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
