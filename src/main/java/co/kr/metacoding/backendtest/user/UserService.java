@@ -14,7 +14,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public UserResponse.JoinDTO join(UserRequest.JoinDTO reqDTO) {
+    public UserResponse.JoinDTO save(UserRequest.JoinDTO reqDTO) {
         // 이미 존재하는 name인지 검사
         Optional<User> userOP = userRepository.findByName(reqDTO.getName());
         if(userOP.isPresent()) throw new ExceptionApi400("중복된 유저네임이 존재합니다.");

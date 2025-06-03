@@ -12,8 +12,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/users")
-    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO) {
-        UserResponse.JoinDTO respDTO = userService.join(reqDTO);
+    public ResponseEntity<?> save(@RequestBody UserRequest.JoinDTO reqDTO) {
+        UserResponse.JoinDTO respDTO = userService.save(reqDTO);
         return ResponseEntity.ok(respDTO);
     }
 
