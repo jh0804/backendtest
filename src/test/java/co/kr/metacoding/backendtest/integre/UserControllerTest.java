@@ -39,11 +39,11 @@ public class UserControllerTest {
     @Test
     public void save_test() throws Exception {
         // given
-        UserRequest.UpdateDTO reqDTO = new UserRequest.UpdateDTO();
+        UserRequest.SaveDTO reqDTO = new UserRequest.SaveDTO();
         reqDTO.setName("haha");
 
         String requestBody = om.writeValueAsString(reqDTO);
-        System.out.println(requestBody);
+        // System.out.println(requestBody);
 
         // when
         ResultActions actions = mvc.perform(
@@ -55,7 +55,7 @@ public class UserControllerTest {
 
         // eye
         String responseBody = actions.andReturn().getResponse().getContentAsString();
-        System.out.println(responseBody);
+        // System.out.println(responseBody);
 
         // then
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(4));
@@ -74,7 +74,7 @@ public class UserControllerTest {
 
         // eye
         String responseBody = actions.andReturn().getResponse().getContentAsString();
-        System.out.println(responseBody);
+        // System.out.println(responseBody);
 
         // then
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1));

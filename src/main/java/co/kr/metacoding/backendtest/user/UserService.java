@@ -14,7 +14,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public UserResponse.JoinDTO save(UserRequest.JoinDTO reqDTO) {
+    public UserResponse.SaveDTO save(UserRequest.SaveDTO reqDTO) {
         // 이미 존재하는 name인지 검사
         Optional<User> userOP = userRepository.findByName(reqDTO.getName());
         if(userOP.isPresent()) throw new ExceptionApi400("중복된 유저네임이 존재합니다.");
@@ -22,7 +22,7 @@ public class UserService {
         // 유저 등록
         User userPS = userRepository.save(reqDTO.toEntity());
 
-        return new UserResponse.JoinDTO(userPS);
+        return new UserResponse.SaveDTO(userPS);
     }
 
     public UserResponse.DTO getDetail(Integer id) {

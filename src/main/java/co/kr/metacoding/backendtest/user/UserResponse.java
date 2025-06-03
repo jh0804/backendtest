@@ -5,10 +5,10 @@ import lombok.Data;
 public class UserResponse {
 
     @Data
-    public static class JoinDTO {
+    public static class SaveDTO {
         private Integer id;
 
-        public JoinDTO(User user) {
+        public SaveDTO(User user) {
             this.id = user.getId();
         }
     }
