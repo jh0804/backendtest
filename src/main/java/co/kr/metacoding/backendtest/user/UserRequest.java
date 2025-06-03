@@ -14,4 +14,15 @@ public class UserRequest {
                     .build();
         }
     }
+
+    @Data
+    public static class UpdateDTO {
+        private String name;
+
+        public User toEntity(){
+            return User.builder()
+                    .name(name)
+                    .build();
+        }
+    }
 }
