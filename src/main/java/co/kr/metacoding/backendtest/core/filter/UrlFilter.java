@@ -5,12 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@Slf4j
 public class UrlFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
@@ -28,7 +30,7 @@ public class UrlFilter implements Filter {
             return;
         }
 
-        chain.doFilter(request, response);
+        chain.doFilter(req, resp);
     }
 
     private void exResponse(HttpServletResponse response, String msg) throws IOException {
