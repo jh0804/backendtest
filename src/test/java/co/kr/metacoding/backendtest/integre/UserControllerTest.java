@@ -128,6 +128,7 @@ public class UserControllerTest {
 
         // then
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.reason").value("해당 유저를 찾을 수 없습니다."));
+
     }
 
     // 유저 수정 성공
