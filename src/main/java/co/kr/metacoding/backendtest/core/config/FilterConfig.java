@@ -22,9 +22,9 @@ public class FilterConfig {
     public FilterRegistrationBean<LogFilter> logFilter() {
         FilterRegistrationBean<LogFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new LogFilter());
-        registrationBean.addUrlPatterns("/users/*"); // 모든 요청에 적용
+        registrationBean.addUrlPatterns("/users/*"); 
+
         registrationBean.setOrder(1);
         return registrationBean;
     }
-
 }
