@@ -123,10 +123,10 @@ public class UserControllerTest {
 
         // eye
         String responseBody = actions.andReturn().getResponse().getContentAsString();
-        System.out.println(responseBody);
+        // System.out.println(responseBody);
 
         // then
-
+        actions.andExpect(MockMvcResultMatchers.jsonPath("$.reason").value("해당 유저를 찾을 수 없습니다."));
     }
 
     // 유저 수정 성공
@@ -185,4 +185,7 @@ public class UserControllerTest {
         // then
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.reason").value("해당 유저를 찾을 수 없습니다."));
     }
+
+    // URL에 ? & = : //를 제외한 특수문자가 포함 시 차단 filter 테스트
+
 }
