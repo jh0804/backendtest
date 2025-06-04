@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ResponseEntity<ErrorResponse> noMatchApi404(NoHandlerFoundException  e) {
+    public ResponseEntity<ErrorResponse> noMatchApi404(NoHandlerFoundException e) {
         log.warn(e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
