@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
 public class LottoRepository {
@@ -12,5 +14,9 @@ public class LottoRepository {
     public Lotto save(Lotto lotto) {
         em.persist(lotto);
         return lotto;
+    }
+
+    public List<Lotto> findAll() {
+
     }
 }
