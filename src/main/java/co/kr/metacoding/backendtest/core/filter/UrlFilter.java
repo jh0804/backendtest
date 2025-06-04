@@ -20,6 +20,12 @@ public class UrlFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         String uri = request.getRequestURI();
+
+        if (uri.startsWith("/h2-console")) {
+            chain.doFilter(req, resp);
+            return;
+        }
+
         String queryString = request.getQueryString();
 
         String path = uri + (queryString != null ? "?" + queryString : "");
