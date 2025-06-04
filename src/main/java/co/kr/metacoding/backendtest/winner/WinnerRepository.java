@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class WinnerRepository {
     private final EntityManager em;
+
+    public void save(Winner winner) {
+        em.persist(winner);
+    }
 }

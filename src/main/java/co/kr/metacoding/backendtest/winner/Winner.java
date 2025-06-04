@@ -1,5 +1,6 @@
 package co.kr.metacoding.backendtest.winner;
 
+import co.kr.metacoding.backendtest.lotto.Lotto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +12,15 @@ public class Winner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long lottoId;
+
+    @ManyToOne
+    private Lotto lotto;
     private Integer rank;
+
+    @Builder
+    public Winner(Long id, Lotto lotto, Integer rank) {
+        this.id = id;
+        this.lotto = lotto;
+        this.rank = rank;
+    }
 }

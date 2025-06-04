@@ -6,11 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
+import java.util.List;
+
 @Import(LottoRepository.class)
 @DataJpaTest
 public class LottoRepositoryTest {
     @Autowired
     private LottoRepository lottoRepository;
+
+    @Test
+    public void findAll_test(){
+        // given
+
+        // when
+        List<Lotto> lottoList = lottoRepository.findAll();
+        System.out.println(lottoList.size());
+        // eye
+        for(Lotto lotto : lottoList){
+            System.out.println(lotto.getId());
+        }
+    }
 
     @Test
     public void findByName_test(){

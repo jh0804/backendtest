@@ -1,6 +1,7 @@
 package co.kr.metacoding.backendtest.lotto;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,7 @@ public class LottoRepository {
     }
 
     public List<Lotto> findAll() {
-
+        Query query = em.createQuery("select l from Lotto l", Lotto.class);
+        return query.getResultList();
     }
 }
