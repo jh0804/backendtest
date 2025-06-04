@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 public class WinnerScheduler {
     private final WinnerService winnerService;
 
-    //@Scheduled(cron = "0 0 0 * * SUN") // 매주 일요일 0시
-    @Scheduled(cron = "*/10 * * * * *") // 매 5초마다 실행
+    @Scheduled(cron = "0 0 0 * * SUN") // 매주 일요일 0시
     public void runScheduler() {
         winnerService.checkWinners();
     }
